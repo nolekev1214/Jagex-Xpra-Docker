@@ -1,8 +1,6 @@
 FROM fedora:latest
 LABEL maintainer="nolekev1214"
 
-ARG LOGIN_PASSWORD="osrs"
-
 RUN dnf update -y && dnf install -y wget openssl
 
 RUN wget -O /etc/yum.repos.d/xpra.repo https://raw.githubusercontent.com/Xpra-org/xpra/master/packaging/repos/Fedora/xpra.repo
@@ -17,6 +15,7 @@ RUN flatpak install -y JagexLauncher com.jagex.Launcher
 RUN flatpak install -y JagexLauncher com.jagex.Launcher.ThirdParty.RuneLite
 RUN flatpak install -y JagexLauncher com.jagex.Launcher.ThirdParty.HDOS
 
+ARG LOGIN_PASSWORD="osrs"
 ENV XPRA_PASSWORD=LOGIN_PASSWORD
 
 CMD ["xpra", "start", "--start=xterm", "--bind-tcp=0.0.0.0:10000,auth=env", "--daemon=no"]
