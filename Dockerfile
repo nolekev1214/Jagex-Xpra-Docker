@@ -16,6 +16,6 @@ RUN flatpak install -y JagexLauncher com.jagex.Launcher.ThirdParty.RuneLite
 RUN flatpak install -y JagexLauncher com.jagex.Launcher.ThirdParty.HDOS
 
 ARG LOGIN_PASSWORD="osrs"
-ENV XPRA_PASSWORD=LOGIN_PASSWORD
+ENV XPRA_PASSWORD=${LOGIN_PASSWORD}
 
 CMD ["xpra", "start", "--start=xterm", "--bind-tcp=0.0.0.0:10000,auth=env", "--daemon=no"]
